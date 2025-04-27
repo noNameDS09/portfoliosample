@@ -14,8 +14,9 @@ const Hero = () => {
                 Shreyash Daware
             </div>
             <div className={`${amatic_SC.className} text-2xl tracking-wider`}>
+                Hi,
                 <span>
-                    Hi, I'm Shreyash, a frontend developer who enjoys building
+                    I'm Shreyash, a frontend developer who enjoys building
                     clean and responsive websites. I work with HTML, CSS,
                     JavaScript, and React to create user-friendly web
                     experiences. I'm always learning and love turning ideas into
