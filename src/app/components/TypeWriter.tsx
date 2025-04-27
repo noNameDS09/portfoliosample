@@ -1,5 +1,5 @@
 "use client";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
 interface TypewriterProps extends HTMLMotionProps<"p"> {
