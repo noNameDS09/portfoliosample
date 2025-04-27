@@ -1,5 +1,6 @@
 import React from "react";
 import { Amatic_SC } from "next/font/google";
+import { Typewriter } from "./TypeWriter";
 
 const amatic_SC = Amatic_SC({
     weight: "700",
@@ -13,9 +14,21 @@ const Hero = () => {
                 Shreyash Daware
             </div>
             <div className={`${amatic_SC.className} text-2xl tracking-wider`}>
-                Hi,
                 <span>
-                    {"I'm Shreyash, a frontend developer who enjoys building clean and responsive websites. I work with HTML, CSS, JavaScript, and React to create user-friendly web experiences. I'm always learning and love turning ideas into real, functional designs."}
+                    <Typewriter
+                        text={[
+                            "Frontend Developer",
+                            "React Enthusiast",
+                            "JavaScript Developer",
+                            "Tech Enthusiast",
+                        ]}
+                        typingSpeed={20}
+                        eraseSpeed={20}
+                        pauseTime={1000}
+                        loop
+                        showCursor
+                        className={`text-2xl font-mono text-blue-50 ${amatic_SC.className}`}
+                    />
                 </span>
             </div>
         </div>
