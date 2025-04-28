@@ -1,25 +1,25 @@
 import React from "react";
-import { Amatic_SC } from "next/font/google";
+import { Special_Elite } from "next/font/google";
 import { Typewriter } from "./TypeWriter";
 
-const amatic_SC = Amatic_SC({
-    weight: "700",
-    subsets: ["latin"],
-});
+
+const special_elite = Special_Elite({
+    weight : "400",
+    subsets: ["latin"]
+})
 
 const Hero = () => {
     return (
         <div className="p-10">
-            <div className={`${amatic_SC.className} text-white text-5xl`}>
+            <div className={`${special_elite.className} text-gray-100 text-5xl text-center`}>
                 Shreyash Daware
             </div>
-            <div className={`${amatic_SC.className} text-2xl tracking-wider`}>
+            <div className={`${special_elite.className} text-2xl tracking-wider text-center`}>
                 <span>
                     <Typewriter
                         text={[
                             "Frontend Developer",
                             "React Enthusiast",
-                            "JavaScript Developer",
                             "Tech Enthusiast",
                         ]}
                         typingSpeed={20}
@@ -27,7 +27,7 @@ const Hero = () => {
                         pauseTime={1000}
                         loop
                         showCursor
-                        className={`text-2xl font-mono text-blue-50 ${amatic_SC.className}`}
+                        className={`text-2xl font-mono text-blue-50 ${special_elite.className}`}
                     />
                 </span>
             </div>
