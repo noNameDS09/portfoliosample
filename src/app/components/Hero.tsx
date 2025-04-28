@@ -27,7 +27,7 @@ const Hero = () => {
                         pauseTime={1000}
                         loop
                         showCursor
-                        className={`text-2xl font-mono text-blue-50 ${special_elite.className}`}
+                        className={`text-xl  text-blue-50 ${special_elite.className}`}
                     />
                 </span>
             </div>
