@@ -9,7 +9,7 @@ const page = () => {
             id="bg"
             className=""
         >
-            <div className="flex flex-col md:flex-row md:justify-between px-20 pt-10">
+            <div className="flex flex-col md:flex-row md:justify-between md:px-20 pt-10">
                 <Heading />
                 <Contact />
             </div>

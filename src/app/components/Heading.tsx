@@ -10,7 +10,7 @@ const special_elite = Special_Elite({
 
 const Heading = () => {
     return (
-        <div className="p-10">
+        <div className="p-10 flex flex-col justify-center items-center w-fit">
             <div className={`${special_elite.className} text-gray-100 text-5xl text-center`}>
                 Shreyash Daware
             </div>
