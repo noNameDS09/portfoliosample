@@ -37,7 +37,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="flex items-center justify-center gap-6 py-6">
+        <div className="flex items-center justify-center py-6 gap-x-10 md:pr-10">
             {CONTACTS.map(({ href, label, icon, color }, idx) => (
                 <a
                     key={idx}

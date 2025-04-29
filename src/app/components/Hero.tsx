@@ -1,38 +1,24 @@
-import React from "react";
-import { Special_Elite } from "next/font/google";
-import { Typewriter } from "./TypeWriter";
+"use client";
+import React, { useEffect, useState } from "react";
+import { TextRevealCard } from "./ui/text-reveal";
 
+export const Hero: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
 
-const special_elite = Special_Elite({
-    weight : "400",
-    subsets: ["latin"]
-})
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-const Hero = () => {
-    return (
-        <div className="p-10">
-            <div className={`${special_elite.className} text-gray-100 text-5xl text-center`}>
-                Shreyash Daware
-            </div>
-            <div className={`${special_elite.className} text-2xl tracking-wider text-center`}>
-                <span>
-                    <Typewriter
-                        text={[
-                            "Frontend Developer",
-                            "React Enthusiast",
-                            "Tech Enthusiast",
-                        ]}
-                        typingSpeed={20}
-                        eraseSpeed={20}
-                        pauseTime={1000}
-                        loop
-                        showCursor
-                        className={`text-xl  text-blue-50 ${special_elite.className}`}
-                    />
-                </span>
-            </div>
-        </div>
-    );
+  if (!isClient) {
+    return null;
+  }
+
+  return (
+    <div className="flex items-center justify-center md:mt-40 rounded-2xl w-full">
+      <TextRevealCard
+        text="You Know The Vision"
+        revealText="I Know The Code"
+      />
+    </div>
+  );
 };
-
-export default Hero;
