@@ -37,7 +37,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="flex items-center justify-center py-6 gap-x-10 md:pr-10">
+        <div className="flex items-start justify-center py-8 gap-x-10 md:pr-10">
             {CONTACTS.map(({ href, label, icon, color }, idx) => (
                 <a
                     key={idx}
@@ -58,7 +58,7 @@ const Contact = () => {
                 <SiGmail />
                 {copied && (
                     <span
-                        className={`absolute -top-6 left-1/2 -translate-y-7 -translate-x-8 text-sm bg-gray-800 text-gray-200 px-2 py-1 rounded shadow-md ${special_elite.className}`}
+                        className={`absolute -top-6 left-1/2 -translate-y-7 md:translate-y-14 -translate-x-8 text-sm bg-gray-800 text-gray-200 px-2 py-1 rounded shadow-md ${special_elite.className}`}
                     >
                         Email copied!
                     </span>

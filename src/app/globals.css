@@ -60,7 +60,9 @@ body {
 
 @media (max-width: 640px) {
   #bg {
-    background-position: bottom left;
+    background-image: none;
+    background-color: #000;
+    /* background-position: bottom left; */
     background-size: auto 100%;
     padding: 1rem;
   }
