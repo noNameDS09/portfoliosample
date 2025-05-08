@@ -161,6 +161,7 @@ export const TextRevealCardDescription: React.FC<TextRevealCardDescriptionProps>
   );
 };
 
+/*
 const Stars = () => {
   const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
@@ -198,5 +199,5 @@ const Stars = () => {
     </div>
   );
 };
-
+*/
 // export const MemoizedStars = memo(Stars);

@@ -1,12 +1,12 @@
 import React from "react";
-import { Aboreto } from "next/font/google";
+// import { Aboreto } from "next/font/google";
 import MyThree from "../ThreeDComponents/Three";
 // import { useGSAP } from "@gsap/react";
 
-const aboreto = Aboreto({
-    weight: "400",
-    subsets: ["latin"],
-});
+// const aboreto = Aboreto({
+//     weight: "400",
+//     subsets: ["latin"],
+// });
 const Projects = () => {
     return (
         <main className="w-screen h-screen">
