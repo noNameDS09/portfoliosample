@@ -67,7 +67,7 @@ export const TextRevealCard: React.FC<TextRevealCardProps> = ({
       onTouchEnd={mouseLeaveHandler}
       onTouchMove={touchMoveHandler}
       ref={cardRef}
-      className={cn("w-[40rem] rounded-lg p-8 relative overflow-hidden", className)}
+      className={cn("w-[50rem] rounded-lg p-8 relative overflow-hidden", className)}
     >
       {children}
 
@@ -86,13 +86,13 @@ export const TextRevealCard: React.FC<TextRevealCardProps> = ({
                 }
           }
           transition={isMouseOver ? { duration: 0 } : { duration: 0.5 }}
-          className="absolute bg-[#1b1b1b] z-20 will-change-transform"
+          className="absolute  bg-[#0e0e0e] z-20 will-change-transform"
         >
           <p
             style={{
               textShadow: "4px 4px 15px rgba(0,0,0,0.5)",
             }}
-            className="text-[1.5rem] sm:text-[3rem] py-10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-50 text-center"
+            className="text-[1.5rem] sm:text-[2rem] py-10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-50 text-center"
           >
             {revealText}
           </p>
@@ -118,11 +118,11 @@ export const TextRevealCard: React.FC<TextRevealCardProps> = ({
             style={{
               textShadow: "4px 4px 15px rgba(0,0,0,0.5)",
             }}
-            className="text-[1.5rem] sm:text-[3rem] py-10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-50 text-center"
+            className="text-[1.5rem] sm:text-[2rem] py-10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-50 text-center"
           >
             {text}
           </p>
-          <MemoizedStars />
+          {/* <MemoizedStars /> */}
         </div>
       </div>
     </div>
@@ -199,4 +199,4 @@ const Stars = () => {
   );
 };
 
-export const MemoizedStars = memo(Stars);
+// export const MemoizedStars = memo(Stars);

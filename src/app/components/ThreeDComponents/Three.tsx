@@ -1,0 +1,157 @@
+'use client'
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
+import { SplitText } from 'gsap/SplitText';
+
+gsap.registerPlugin(ScrambleTextPlugin, SplitText);
+
+const quotesData = [
+  'Imagination is power',
+  'Code is story',
+  'Creativity takes courage',
+  'Design is intelligence made visible',
+  'Every pixel has a purpose',
+  'Simplicity is the ultimate sophistication',
+  "Every great interface starts with a single line of code.",
+  "Code is where logic meets imagination.",
+  "Good design is invisible; great code is invincible.",
+  "Creativity doesn't wait for the perfect brief — just like JavaScript doesn't wait for types.",
+  "Debugging is the art of understanding the problem you created.",
+  "Craft experiences, not just components.",
+  "Time is your canvas — animate wisely.",
+  "The best animations feel alive, not choreographed.",
+  "Transitions aren't delays — they're conversations.",
+  "Animate for emotion, not motion.",
+];
+
+const scrambleChars = 'upperAndLowerCase';
+const message = 'You dream it, We build it';
+
+export default function Three() {
+  const targetRef = useRef<HTMLSpanElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const [isDecoded, setIsDecoded] = useState(false);
+
+  const getRandomPosition = () => {
+    const x = Math.random() * (window.innerWidth - 200);
+    const y = Math.random() * (window.innerHeight - 100);
+    return { x, y };
+  };
+
+  const scrambleQuote = (quote: HTMLDivElement, text: string) => {
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+    tl.call(() => {
+      const { x, y } = getRandomPosition();
+      gsap.set(quote, { x, y });
+    })
+      .to(quote, {
+        delay: Math.random() * 5,
+        duration:1,
+        opacity: 1,
+        scrambleText: { text, chars: scrambleChars, revealDelay: 0.1, speed: 1 },
+        ease: 'power2.out',
+      })
+      .to(quote, {
+        delay: 2,
+        duration: 1,
+        scrambleText: { text: '', chars: scrambleChars },
+        opacity: 0,
+        ease: 'power2.in',
+      });
+  };
+
+  useEffect(() => {
+    const quoteElements = document.querySelectorAll<HTMLDivElement>('.quote');
+    
+    quoteElements.forEach((el) => {
+      gsap.set(el, {
+        position: 'absolute',
+        opacity: 0,
+        whiteSpace: 'nowrap',
+      });
+      scrambleQuote(el, el.textContent || '');
+    });
+  }, []);
+
+  useEffect(() => {
+    if (targetRef.current) {
+      gsap.set(targetRef.current, {
+        scrambleText: {
+          text: '*&@#$#@#$@*&$(@#^)',
+          chars: scrambleChars,
+          speed: 1,
+        },
+      });
+    }
+  }, []);
+
+  const toggleScramble = () => {
+    const text = isDecoded ? '*&@#$#@#$@*&$(@#^)' : message;
+    const duration = isDecoded ? 1 : 1.5;
+    const speed = isDecoded ? 0.3 : 1;
+
+    if (targetRef.current) {
+      gsap.to(targetRef.current, {
+        duration,
+        scrambleText: {
+          text,
+          chars: scrambleChars,
+          revealDelay: isDecoded ? 0 : 0.5,
+          speed,
+        },
+      });
+    }
+
+    setIsDecoded((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (h1Ref.current) {
+      const split = SplitText.create(h1Ref.current, { type: 'words, lines' });
+      gsap.from(split.words, {
+        x: 'random([-1000, 1000])',
+        y: 'random([-1000, 1000])',
+        opacity: 0,
+        ease: 'expo.inOut',
+        duration: 1.25,
+      });
+    }
+  }, []);
+
+  return (
+    <section className="relative w-full h-screen overflow-hidden text-xs font-semibold bg-[#0e0e0e] text-white/30">
+
+      <div className="absolute top-2/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-5">
+        <h1
+          ref={h1Ref}
+          className="text-4xl md:text-6xl font-bold text-zinc-100 text-center mb-8 w-14/10 max-w-[150ch]"
+        >
+          Encrypt Your Ideas 
+        </h1>
+
+        <div className="relative w-60 bg-white text-black border border-black shadow-lg shadow-white/30 hover:shadow-white/50 py-5 px-4 rounded-[2rem] overflow-hidden scale-150 hover:scale-160 duration-200">
+          <span ref={targetRef} className="select-none">
+            *&@#$#@#$@*&$(@#^)
+          </span>
+          <button
+            ref={buttonRef}
+            type="button"
+            onClick={toggleScramble}
+            className="absolute top-1/2 -translate-y-1/2 right-0 border border-zinc-600 h-full aspect-square bg-black hover:bg-black/85 duration-100 text-white rounded-full text-[10px] focus:outline-green-500 scale-95 cursor-pointer"
+          >
+            {isDecoded ? 'Encrypt' : 'Decrypt'}
+          </button>
+        </div>
+      </div>
+
+      {quotesData.map((quote, idx) => (
+        <div key={idx} className="quote opacity-0">
+          {quote}
+        </div>
+      ))}
+    </section>
+  );
+}

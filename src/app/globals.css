@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000dd;
+  --background: #0e0e0e;
   --foreground: #e0e7ff;
   --primary-color: #000000de;
   --secondary-color: #e0e7ff;
@@ -29,6 +29,7 @@
 }
 
 body {
+  /* background: linear-gradient(to right, #0e0e0e, #0b0b0a); */
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -36,12 +37,10 @@ body {
 
 #bg {
   position: relative;
-  background-image: url("/bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: #0e0e0e;
+  /* background : linear-gradient(to right, #0e0e0e, #0b0b0a); */
   width: 100vw;
-  min-height: 100vh;
+  max-height: 100vh;
   height: 100dvh;
 }
 
@@ -49,23 +48,13 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background: #0e0e0e;
   z-index: 0;
 }
 
 #bg>* {
   position: relative;
   z-index: 1;
-}
-
-@media (max-width: 640px) {
-  #bg {
-    background-image: none;
-    background-color: #000;
-    /* background-position: bottom left; */
-    background-size: auto 100%;
-    padding: 1rem;
-  }
 }
 
 

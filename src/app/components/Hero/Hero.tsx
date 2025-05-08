@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { TextRevealCard } from "./ui/text-reveal";
+import { TextRevealCard } from "../ui/text-reveal";
+import { Aboreto } from "next/font/google";
 
+const aboreto = Aboreto({
+    weight : "400",
+    subsets : ["latin"]
+})
 export const Hero: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
 
@@ -14,7 +19,7 @@ export const Hero: React.FC = () => {
   }
 
   return (
-    <div className="flex items-center justify-center md:mt-40 rounded-2xl w-full">
+    <div className={`${aboreto.className} flex items-center justify-center md:mt-40 rounded-2xl w-full`}>
       <TextRevealCard
         text="You Know The Vision"
         revealText="I Know The Code"

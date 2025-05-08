@@ -22,13 +22,13 @@ export const sentenceVariants = {
 
 export const letterVariants = {
     hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.05 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
 };
 
 export const Typewriter: React.FC<TypewriterProps> = ({
     text,
     typingSpeed = 50,
-    eraseSpeed = 30,
+    eraseSpeed = 50,
     pauseTime = 2000,
     loop = true,
     showCursor = true,
@@ -86,7 +86,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
             {...rest}
         >
             <motion.span variants={letterVariants}>{displayText}</motion.span>
-            {showCursor && <span className="ml-1 blinking-cursor">|</span>}
+            {showCursor && <span className="ml-0 blinking-cursor">|</span>}
         </motion.p>
     );
 };
