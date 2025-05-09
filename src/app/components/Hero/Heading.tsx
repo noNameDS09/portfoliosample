@@ -10,7 +10,7 @@ const aboreto = Aboreto({
 
 const Heading = () => {
     return (
-        <div className=" flex flex-col w-fit">
+        <div className=" flex flex-col w-fit justify-center items-center">
             <div className={`${aboreto.className} text-gray-100 text-xl text-center mt-10`}>
                 Shreyash Daware
             </div>

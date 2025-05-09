@@ -19,7 +19,7 @@ export const Hero: React.FC = () => {
   }
 
   return (
-    <div className={`${aboreto.className} flex items-center justify-center md:mt-40 rounded-2xl w-full`}>
+    <div className={`${aboreto.className} flex items-center justify-center mt-40 md:mt-40 rounded-2xl w-full`}>
       <TextRevealCard
         text="You Know The Vision"
         revealText="I Know The Code"
