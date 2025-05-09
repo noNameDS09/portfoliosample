@@ -19,20 +19,15 @@ gsap.registerPlugin(ScrambleTextPlugin, SplitText);
 const quotesData = [
     "Imagination is power",
     "Code is story",
-    "Creativity takes courage",
-    "Design is intelligence made visible",
     "Every pixel has a purpose",
-    "Simplicity is the ultimate sophistication",
     "Every great interface starts with a single line of code.",
     "Code is where logic meets imagination.",
-    "Good design is invisible; great code is invincible.",
     "Creativity doesn't wait for the perfect brief — just like JavaScript doesn't wait for types.",
     "Debugging is the art of understanding the problem you created.",
     "Craft experiences, not just components.",
     "Time is your canvas — animate wisely.",
     "The best animations feel alive, not choreographed.",
     "Transitions aren't delays — they're conversations.",
-    "Animate for emotion, not motion.",
 ];
 
 const scrambleChars = "upperAndLowerCase";
@@ -42,11 +37,11 @@ export default function Three() {
     const targetRef = useRef<HTMLSpanElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const h1Ref = useRef<HTMLHeadingElement>(null);
-    const [isDecoded, setIsDecoded] = useState(false);
+    const [isDecoded, setIsDecoded] = useState<boolean>(false);
 
     const getRandomPosition = () => {
         const x = Math.random() * (window.innerWidth - 200);
-        const y = Math.random() * (window.innerHeight - 100);
+        const y = Math.random() * (window.innerHeight - 200);
         return { x, y };
     };
 
@@ -140,9 +135,9 @@ export default function Three() {
     }, []);
 
     return (
-        <section className="relative w-full h-screen overflow-hidden text-xs font-semibold bg-[#0e0e0e] text-white/30">
+        <section className="relative w-screen h-screen overflow-hidden text-xs font-semibold bg-[#0e0e0e] text-white/30">
             <div
-                className={`${aboreto.className} absolute top-2/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-5 px-4`}
+                className={`${aboreto.className} absolute top-2/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-5 px-4`}
             >
                 <h1
                     ref={h1Ref}
@@ -152,8 +147,7 @@ export default function Three() {
                 </h1>
 
                 <div
-                    className="relative w-full sm:w-64 bg-white text-black border border-black shadow-lg shadow-white/30 hover:shadow-white/50 py-5 px-4 rounded-[2rem] overflow-hidden text-sm 
-  scale-100 sm:scale-110 hover:scale-105 md:hover:scale-[1.15] transition-transform duration-200"
+                    className="relative w-60 sm:w-64 bg-white text-black border border-black shadow-lg shadow-white/30 hover:shadow-white/50 py-5 px-4 rounded-[2rem] overflow-hidden text-sm scale-100 sm:scale-110 hover:scale-105 md:hover:scale-[1.15] transition-transform duration-200"
                 >
                     <span
                         ref={targetRef}
@@ -175,7 +169,7 @@ export default function Three() {
             {quotesData.map((quote, idx) => (
                 <div
                     key={idx}
-                    className={`${aboreto.className} quote opacity-0 text-center sm:text-md text-xs`}
+                    className={`${aboreto.className} quote opacity-0 text-center sm:text-md text-xs h-screen max-w-1/2`}
                 >
                     {quote}
                 </div>

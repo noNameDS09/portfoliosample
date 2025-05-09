@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { cn } from "@/app/lib/utils";
+import { memo } from "framer-motion";
 
 interface TextRevealCardProps {
   text: string;
@@ -122,7 +123,7 @@ export const TextRevealCard: React.FC<TextRevealCardProps> = ({
           >
             {text}
           </p>
-          {/* <MemoizedStars /> */}
+          <MemoizedStars />
         </div>
       </div>
     </div>
@@ -161,7 +162,7 @@ export const TextRevealCardDescription: React.FC<TextRevealCardDescriptionProps>
   );
 };
 
-/*
+
 const Stars = () => {
   const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
@@ -199,5 +200,5 @@ const Stars = () => {
     </div>
   );
 };
-*/
-// export const MemoizedStars = memo(Stars);
+
+export const MemoizedStars = memo(Stars);

@@ -28,11 +28,23 @@
   --secondary-color: #000000e4;
 }
 
+html{
+  cursor: none;
+  
+}
+
+
 body {
   /* background: linear-gradient(to right, #0e0e0e, #0b0b0a); */
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  cursor: none;
+}
+
+
+button, a, :hover{
+  cursor: none;
 }
 
 #bg {
