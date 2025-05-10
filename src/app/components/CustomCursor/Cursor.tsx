@@ -56,7 +56,7 @@ const Cursor = () => {
     };
   }, [position]);
 
-  const cursorColor = hovering ? "sky-600" : "sky-300";
+  // const cursorColor = hovering ? "sky-600" : "sky-300";
 
   return (
     <>

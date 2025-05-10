@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 import { Special_Elite } from "next/font/google";
 
