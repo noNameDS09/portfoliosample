@@ -11,12 +11,12 @@ const special_elite = Special_Elite({
 });
 
 const CONTACTS = [
-    {
-        href: "https://github.com/noNameDS09",
-        label: "GitHub Profile",
-        icon: <FaGithub />,
-        color: "hover:text-white",
-    },
+    // {
+    //     href: "https://github.com/noNameDS09",
+    //     label: "GitHub Profile",
+    //     icon: <FaGithub />,
+    //     color: "hover:text-white",
+    // },
     {
         href: "https://www.linkedin.com/in/shreyash-daware-3ba6672bb",
         label: "LinkedIn Profile",

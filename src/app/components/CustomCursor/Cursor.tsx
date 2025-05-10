@@ -1,35 +1,22 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import clsx from "clsx";
 
-// Tailwind-safe classes
-const COLOR_CLASSES: Record<string, string> = {
-  button: "orange-500",
-  a: "neutral-500",
-  default: "sky-500",
-};
-
 const Cursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [cursorColor, setCursorColor] = useState<string>(COLOR_CLASSES.default);
-  const [clicked, setClicked] = useState<boolean>(false);
-  const [hovering, setHovering] = useState<boolean>(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 }); 
+  const [outerPosition, setOuterPosition] = useState({ x: 0, y: 0 });
+  const [clicked, setClicked] = useState(false);
+  const [hovering, setHovering] = useState(false);
+
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
 
       const target = e.target as HTMLElement;
-      const tag = target.closest("button, a");
-      const tagName = tag?.tagName.toLowerCase();
-
-      if (tagName && COLOR_CLASSES[tagName]) {
-        setCursorColor(COLOR_CLASSES[tagName]);
-        setHovering(true);
-      } else {
-        setCursorColor(COLOR_CLASSES.default);
-        setHovering(false);
-      }
+      const isInteractive = target.closest("button, a, [role='button'], input, textarea, select, label");
+      setHovering(!!isInteractive);
     };
 
     const handleMouseDown = () => {
@@ -46,39 +33,60 @@ const Cursor = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const followCursor = () => {
+      setOuterPosition(prev => {
+        const dx = position.x - prev.x;
+        const dy = position.y - prev.y;
+        const speed = 0.10;
+        return {
+          x: prev.x + dx * speed,
+          y: prev.y + dy * speed,
+        };
+      });
+      animationRef.current = requestAnimationFrame(followCursor);
+    };
+
+    animationRef.current = requestAnimationFrame(followCursor);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [position]);
+
+  const cursorColor = hovering ? "sky-600" : "sky-300";
+
   return (
     <>
-
-      {/* Inner Dot */}
       <div
         style={{ top: position.y, left: position.x }}
         className={clsx(
           "fixed w-1 h-1 rounded-full pointer-events-none z-[1000]",
-          "transition-transform duration-100 ease-out -translate-x-1/2 -translate-y-1/2",
-          `bg-${cursorColor}`
+          "transition-transform duration-0 ease-in -translate-x-1/2 -translate-y-1/2",
+          `${hovering ? "bg-sky-600" : "bg-red-300"}`
         )}
       />
 
-      {/* Outer Ring */}
       <div
-        style={{ top: position.y, left: position.x }}
+        style={{ top: outerPosition.y, left: outerPosition.x }}
         className={clsx(
           "fixed w-10 h-10 rounded-full pointer-events-none z-[1000]",
-          "transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2",
-          `border-2 border-${cursorColor}`,
+          "transition-transform duration-100 ease-in -translate-x-1/2 -translate-y-1/2",
+          `border-2 ${hovering ? "border-blue-400" : "border-sky-300"}`,
           clicked ? "scale-75 opacity-50" : hovering ? "scale-125 opacity-90" : "scale-[0.9] opacity-80"
         )}
       />
 
-      {/* Click Pulse Effect */}
       {clicked && (
         <div
           style={{ top: position.y, left: position.x }}
           className={clsx(
             "fixed w-12 h-12 rounded-full pointer-events-none z-30",
             "transition-opacity duration-300 ease-out -translate-x-1/2 -translate-y-1/2",
-            `bg-${cursorColor}`,
-            "opacity-20 animate-ping"
+            `bg-red-700}`,
+            "opacity-100 animate-ping"
           )}
         />
       )}

@@ -57,7 +57,7 @@ export const TextRevealCard: React.FC<TextRevealCardProps> = ({
     }
   };
 
-  const rotateDeg = widthPercentage * 0.1;
+  const rotateDeg = widthPercentage;
 
   return (
     <div
