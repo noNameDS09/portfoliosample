@@ -46,7 +46,7 @@ body {
 button, a, :hover{
   cursor: none;
 }
-
+  
 #bg {
   position: relative;
   background: #0e0e0e;

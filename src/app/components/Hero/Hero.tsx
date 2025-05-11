@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { TextRevealCard } from "../ui/text-reveal";
 import { Aboreto } from "next/font/google";
 
 const aboreto = Aboreto({
@@ -20,10 +19,7 @@ export const Hero: React.FC = () => {
 
   return (
     <div className={`${aboreto.className} flex items-center justify-center mt-40 md:mt-40 rounded-2xl w-full`}>
-      <TextRevealCard
-        text="You Know The Vision"
-        revealText="I Know The Code"
-      />
+      
     </div>
   );
 };

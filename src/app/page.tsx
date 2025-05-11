@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
 import Heading from "./components/Hero/Heading";
 import Contact from "./components/Hero/Contact";
 import { Hero } from "./components/Hero/Hero";
 import Projects from "./components/Projects/Projects";
-// import Background from "./components/Hero/Background";
+import { TechStack } from "./components/TechStack/Techstack";
 
 const page = () => {
     return (
@@ -19,6 +20,9 @@ const page = () => {
             </div>
             <div>
                 <Projects />
+            </div>
+            <div className="w-screen h-screen bg-[#0e0e0e]">
+                <TechStack />
             </div>
         </div>
     );

@@ -65,7 +65,8 @@ const Cursor = () => {
         className={clsx(
           "fixed w-1 h-1 rounded-full pointer-events-none z-[1000]",
           "transition-transform duration-0 ease-in -translate-x-1/2 -translate-y-1/2",
-          `${hovering ? "bg-sky-600" : "bg-red-300"}`
+          `${hovering ? "bg-sky-600" : "bg-red-300"}`,
+          'hidden md:block'
         )}
       />
 
@@ -75,7 +76,8 @@ const Cursor = () => {
           "fixed w-10 h-10 rounded-full pointer-events-none z-[1000]",
           "transition-transform duration-100 ease-in -translate-x-1/2 -translate-y-1/2",
           `border-2 ${hovering ? "border-blue-400" : "border-sky-300"}`,
-          clicked ? "scale-75 opacity-50" : hovering ? "scale-125 opacity-90" : "scale-[0.9] opacity-80"
+          clicked ? "scale-75 opacity-50" : hovering ? "scale-125 opacity-90" : "scale-[0.9] opacity-80",
+          'hidden md:block'
         )}
       />
 
@@ -86,7 +88,8 @@ const Cursor = () => {
             "fixed w-12 h-12 rounded-full pointer-events-none z-30",
             "transition-opacity duration-300 ease-out -translate-x-1/2 -translate-y-1/2",
             `bg-red-700}`,
-            "opacity-100 animate-ping"
+            "opacity-100 animate-ping",
+            'hidden md:block'
           )}
         />
       )}
