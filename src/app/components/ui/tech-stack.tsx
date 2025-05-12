@@ -6,7 +6,7 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
-  useVelocity,
+  // useVelocity,
   useAnimationControls,
 } from "framer-motion";
 
