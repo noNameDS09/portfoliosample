@@ -35,8 +35,8 @@ export const DraggableCardBody = ({
     bottom: 0,
   });
 
-  const velocityX = useVelocity(mouseX);
-  const velocityY = useVelocity(mouseY);
+  // const velocityX = useVelocity(mouseX);
+  // const velocityY = useVelocity(mouseY);
 
   const rotateX = useSpring(
     useTransform(mouseY, [-300, 300], [25, -25]),
