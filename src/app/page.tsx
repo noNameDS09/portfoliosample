@@ -8,7 +8,7 @@ import { TechStack } from "./components/TechStack/Techstack";
 import Cursor from "./components/CustomCursor/Cursor";
 import StickyCursor from "./components/CustomCursor/StickyCursor/MagneticCursor";
 
-const page = () => {
+const Page = () => {
   const stickyElement = useRef(null);
   return (
     <>
@@ -36,4 +36,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
