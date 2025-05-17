@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import Heading from "./components/Hero/Heading";
 import Contact from "./components/Hero/Contact";
-import { Hero } from "./components/Hero/Hero";
+// import { Hero } from "./components/Hero/Hero";
 import Projects from "./components/Projects/Projects";
 import { TechStack } from "./components/TechStack/Techstack";
 import Cursor from "./components/CustomCursor/Cursor";
