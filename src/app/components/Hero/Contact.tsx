@@ -13,7 +13,7 @@ const special_elite = Special_Elite({
 
 interface ContactProps {
   // Add any props you might need in the future
-  x:string
+
 }
 
 interface ContactItem {
