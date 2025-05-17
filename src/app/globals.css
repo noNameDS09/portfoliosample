@@ -53,7 +53,7 @@ button, a, :hover{
   /* background : linear-gradient(to right, #0e0e0e, #0b0b0a); */
   width: 100vw;
   max-height: 100vh;
-  height: 90dvh;
+  height: 100dvh;
 }
 
 #bg::before {

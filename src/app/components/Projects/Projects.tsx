@@ -1,6 +1,6 @@
 import React from "react";
 // import { Aboreto } from "next/font/google";
-import MyThree from "../ThreeDComponents/Three";
+import MyThree from "../DecodeVision/Three";
 // import { useGSAP } from "@gsap/react";
 
 // const aboreto = Aboreto({

@@ -6,7 +6,6 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
-  // useVelocity,
   useAnimationControls,
 } from "framer-motion";
 
@@ -35,9 +34,6 @@ export const DraggableCardBody = ({
     bottom: 0,
   });
 
-  // const velocityX = useVelocity(mouseX);
-  // const velocityY = useVelocity(mouseY);
-
   const rotateX = useSpring(
     useTransform(mouseY, [-300, 300], [25, -25]),
     springConfig
@@ -55,7 +51,6 @@ export const DraggableCardBody = ({
     springConfig
   );
 
-  // Debounced resize update
   useEffect(() => {
     const updateConstraints = () => {
       if (cardRef.current && typeof window !== "undefined") {
@@ -70,7 +65,7 @@ export const DraggableCardBody = ({
           top: -verticalMargin - 100,
           left: -horizontalMargin - 30,
           right: horizontalMargin + 20,
-          bottom: verticalMargin + 300,
+          bottom: verticalMargin,
         });
       }
     };
@@ -117,9 +112,9 @@ export const DraggableCardBody = ({
       dragConstraints={constraints}
       dragElastic={0.5}
       dragTransition={{
-        bounceStiffness: 500,
+        bounceStiffness: 100,
         bounceDamping: 10,
-        power: 0.1,
+        power: 0.2,
       }}
       onDragStart={() => {
         document.body.style.cursor = "grabbing";

@@ -1,18 +1,23 @@
 'use client';
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
 const Cursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 }); 
-  const [outerPosition, setOuterPosition] = useState({ x: 0, y: 0 });
   const [clicked, setClicked] = useState(false);
   const [hovering, setHovering] = useState(false);
 
-  const animationRef = useRef<number | null>(null);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 20, stiffness: 300, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
 
       const target = e.target as HTMLElement;
       const isInteractive = target.closest("button, a, [role='button'], input, textarea, select, label");
@@ -21,78 +26,79 @@ const Cursor = () => {
 
     const handleMouseDown = () => {
       setClicked(true);
-      setTimeout(() => setClicked(false), 150);
+    };
+
+    const handleMouseUp = () => {
+      setClicked(false);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
-
-  useEffect(() => {
-    const followCursor = () => {
-      setOuterPosition(prev => {
-        const dx = position.x - prev.x;
-        const dy = position.y - prev.y;
-        const speed = 0.10;
-        return {
-          x: prev.x + dx * speed,
-          y: prev.y + dy * speed,
-        };
-      });
-      animationRef.current = requestAnimationFrame(followCursor);
-    };
-
-    animationRef.current = requestAnimationFrame(followCursor);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [position]);
-
-  // const cursorColor = hovering ? "sky-600" : "sky-300";
+  }, [cursorX, cursorY]);
 
   return (
     <>
-      <div
-        style={{ top: position.y, left: position.x }}
+      <motion.div
         className={clsx(
           "fixed w-1 h-1 rounded-full pointer-events-none z-[1000]",
-          "transition-transform duration-0 ease-in -translate-x-1/2 -translate-y-1/2",
-          `${hovering ? "bg-sky-600" : "bg-red-300"}`,
+          "transform -translate-x-1/2 -translate-y-1/2",
+          hovering ? "bg-blue-600" : "bg-sky-300",
           'hidden md:block'
         )}
+        style={{
+          x: cursorX,
+          y: cursorY,
+        }}
       />
 
-      <div
-        style={{ top: outerPosition.y, left: outerPosition.x }}
+      <motion.div
         className={clsx(
           "fixed w-10 h-10 rounded-full pointer-events-none z-[1000]",
-          "transition-transform duration-100 ease-in -translate-x-1/2 -translate-y-1/2",
-          `border-2 ${hovering ? "border-blue-400" : "border-sky-300"}`,
-          clicked ? "scale-75 opacity-50" : hovering ? "scale-125 opacity-90" : "scale-[0.9] opacity-80",
+          "border-2 transform -translate-x-1/2 -translate-y-1/2",
+          hovering ? "border-blue-400" : "border-sky-300",
           'hidden md:block'
         )}
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+        }}
+        animate={{
+          scale: clicked ? 0.75 : hovering ? 1.25 : 0.9,
+          opacity: clicked ? 0.5 : hovering ? 0.9 : 0.8,
+        }}
+        transition={{
+          type: "spring",
+          damping: 10,
+          stiffness: 200,
+        }}
       />
 
-      {clicked && (
-        <div
-          style={{ top: position.y, left: position.x }}
-          className={clsx(
-            "fixed w-12 h-12 rounded-full pointer-events-none z-30",
-            "transition-opacity duration-300 ease-out -translate-x-1/2 -translate-y-1/2",
-            `bg-red-700}`,
-            "opacity-100 animate-ping",
-            'hidden md:block'
-          )}
-        />
-      )}
+      <AnimatePresence>
+        {clicked && (
+          <motion.div
+            className={clsx(
+              "fixed w-12 h-12 rounded-full pointer-events-none z-30",
+              "bg-blue-700/50 transform -translate-x-1/2 -translate-y-1/2",
+              'hidden md:block'
+            )}
+            style={{
+              x: cursorX,
+              y: cursorY,
+            }}
+            initial={{ scale: 0.5, opacity: 1 }}
+            animate={{ scale: 2, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

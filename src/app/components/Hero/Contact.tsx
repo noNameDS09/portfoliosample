@@ -1,71 +1,86 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { FaLinkedin } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 import { Special_Elite } from "next/font/google";
+import Magnetic from "../CustomCursor/StickyCursor/Magnetic";
 
 const special_elite = Special_Elite({
-    weight: "400",
-    subsets: ["latin"],
+  weight: "400",
+  subsets: ["latin"],
 });
 
-const CONTACTS = [
-    // {
-    //     href: "https://github.com/noNameDS09",
-    //     label: "GitHub Profile",
-    //     icon: <FaGithub />,
-    //     color: "hover:text-white",
-    // },
-    {
-        href: "https://www.linkedin.com/in/shreyash-daware-3ba6672bb",
-        label: "LinkedIn Profile",
-        icon: <FaLinkedin />,
-        color: "hover:text-blue-700",
-    },
+interface ContactProps {
+  // Add any props you might need in the future
+}
+
+interface ContactItem {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+  color: string;
+}
+
+const CONTACTS: ContactItem[] = [
+  {
+    href: "https://www.linkedin.com/in/shreyash-daware-3ba6672bb",
+    label: "LinkedIn Profile",
+    icon: <FaLinkedin />,
+    color: "hover:text-blue-700",
+  },
 ];
 
-const EMAIL = "daware.shreyash@gmail.com";
+const EMAIL = process.env.EMAIL!;
 
-const Contact = () => {
-    const [copied, setCopied] = useState(false);
+const Contact = forwardRef<HTMLButtonElement, ContactProps>((props, ref) => {
+  const [copied, setCopied] = useState(false);
 
-    const handleCopyEmail = () => {
-        navigator.clipboard.writeText(EMAIL);
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(EMAIL)
+      .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-    };
+      })
+      .catch(err => console.error("Failed to copy email:", err));
+  };
 
-    return (
-        <div className="flex items-start justify-center py-8 gap-x-10 md:pr-10">
-            {CONTACTS.map(({ href, label, icon, color }, idx) => (
-                <a
-                    key={idx}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className={`text-gray-600 ${color} transition-colors duration-200 text-2xl`}
-                >
-                    {icon}
-                </a>
-            ))}
-            <button
-                onClick={handleCopyEmail}
-                aria-label="Copy email to clipboard"
-                className="relative text-gray-700 hover:text-red-400 transition-colors duration-200 text-2xl"
+  return (
+    <div className="fixed top-20 left-1/2 transform -translate-x-1/2 md:top-10 md:right-10 md:left-auto md:transform-none flex flex-row gap-8 items-center justify-center z-50 backdrop-blur-[4px] rounded-2xl px-10 py-4">
+      {CONTACTS.map(({ href, label, icon, color }, idx) => (
+        <a
+          key={`contact-${idx}`}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className={`text-gray-600 ${color} transition-colors duration-200 text-2xl`}
+        >
+          {icon}
+        </a>
+      ))}
+      
+      <Magnetic>
+        <button
+          ref={ref}
+          onClick={handleCopyEmail}
+          aria-label="Copy email to clipboard"
+          className="relative text-gray-500 hover:text-red-400 transition-colors duration-200 text-2xl"
+        >
+          <SiGmail />
+          {copied && (
+            <span
+              className={`absolute bottom-full -mb-20 left-1/2 -translate-x-1/2 text-sm bg-gray-800 text-gray-100 px-3 py-1 rounded shadow-md ${special_elite.className}`}
             >
-                <SiGmail />
-                {copied && (
-                    <span
-                        className={`absolute -top-6 left-1/2 -translate-y-7 md:translate-y-14 -translate-x-8 text-sm bg-gray-800 text-gray-200 px-2 py-1 rounded shadow-md ${special_elite.className}`}
-                    >
-                        Email copied!
-                    </span>
-                )}
-            </button>
-        </div>
-    );
-};
+              Email copied!
+            </span>
+          )}
+        </button>
+      </Magnetic>
+    </div>
+  );
+});
+
+Contact.displayName = "Contact"; // This helps with debugging
 
 export default Contact;
