@@ -34,7 +34,7 @@ const CONTACTS: ContactItem[] = [
 
 const EMAIL = process.env.EMAIL!;
 
-const Contact = forwardRef<HTMLButtonElement, ContactProps>((props, ref) => {
+const Contact = forwardRef<HTMLButtonElement>((_, ref) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
