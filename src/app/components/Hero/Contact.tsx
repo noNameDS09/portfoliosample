@@ -46,7 +46,7 @@ const Contact = forwardRef<HTMLButtonElement, ContactProps>((props, ref) => {
   };
 
   return (
-    <div className="fixed top-20 left-1/2 transform -translate-x-1/2 md:top-10 md:right-10 md:left-auto md:transform-none flex flex-row gap-8 items-center justify-center z-50 backdrop-blur-[4px] rounded-2xl px-10 py-4">
+    <div className="fixed top-20 left-1/2 transform -translate-x-1/2 md:top-10 md:right-0 md:left-auto md:transform-none flex flex-row gap-8 items-center justify-center z-50 backdrop-blur-[4px] rounded-2xl px-10 py-4">
       {CONTACTS.map(({ href, label, icon, color }, idx) => (
         <a
           key={`contact-${idx}`}

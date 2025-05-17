@@ -7,32 +7,30 @@ import Projects from "./components/Projects/Projects";
 import { TechStack } from "./components/TechStack/Techstack";
 import Cursor from "./components/CustomCursor/Cursor";
 import StickyCursor from "./components/CustomCursor/StickyCursor/MagneticCursor";
-
+import "../app/globals.css";
+import Image from "next/image";
 const Page = () => {
   const stickyElement = useRef(null);
   return (
-    <>
+    <div className="bg-[#0e0e0e]">
       <Cursor />
-      <div className="">
-        <div id="bg">
-          <div className="flex flex-col justify-center items-center md:flex-row md:justify-between md:px-20 pt-5 ">
-            <Heading />
-
-            <Contact ref={stickyElement} />
+      <section className=" ">
+        <nav>
+          <Heading />
+          <Contact ref={stickyElement} />
             <StickyCursor stickyElement={stickyElement} />
-          </div>
-          <div>
-            <Hero />
-          </div>
-        </div>
-        <div>
-          <Projects />
-        </div>
-        <div className="w-screen h-screen bg-[#0e0e0e]">
-          <TechStack />
-        </div>
-      </div>
-    </>
+        </nav>
+        <main className="flex justify-end items-center h-screen w-screen px-20">
+          <Image height={500} width={1000} src={"/DevilGirl.jpg"} alt="image" className="rounded-br-4xl rounded-bl-full rounded-tr-none"/>
+        </main>
+      </section>
+      <section>
+        <Projects />
+      </section>
+      <section>
+        <TechStack />
+      </section>
+    </div>
   );
 };
 
