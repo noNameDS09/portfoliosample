@@ -11,10 +11,7 @@ const special_elite = Special_Elite({
   subsets: ["latin"],
 });
 
-interface ContactProps {
-  // Add any props you might need in the future
-
-}
+// 
 
 interface ContactItem {
   href: string;
